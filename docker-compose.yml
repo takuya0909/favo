@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./www:/var/www
+    depends_on:
+      - php
+
+  php:
+    image: php:7-fpm
+    build: ./php/
+    volumes:
+      - ./www:/var/www
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    command: mysqld --innodb-buffer-pool-size=256M
+    ports:
+      - 13306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
