@@ -1,11 +1,12 @@
-DROP DATABASE IF EXISTS fovo;
-CREATE DATABASE fovo;
-USE fovo;
+DROP DATABASE IF EXISTS favo;
+CREATE DATABASE favo;
+USE favo;
 DROP TABLE IF EXISTS name;
 
 CREATE TABLE user (
   id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(32) NOT NULL,
+  PRIMARY KEY(id)
 )DEFAULT CHARACTER SET=utf8;
 
 CREATE TABLE post (
@@ -32,5 +33,5 @@ insert into post(user_id,name,post) values(1,'takuya','test1');
 insert into post(user_id,name,post) values(2,'kato','test2');
 insert into post(user_id,name,post) values(3,'ito','test3');
 
-insert into fovo(user_id,post_id) values(1,2);
-insert into fovo(user_id,post_id) values(1,3);
+insert into favo(user_id,post_id,del_flg) values(1,2,0);
+insert into favo(user_id,post_id,del_flg) values(1,3,0);
